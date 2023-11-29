@@ -7,9 +7,6 @@ set -ex
 # Actualización de repositorios
  sudo apt update
 
-# Actualización de paquetes
-# sudo apt upgrade  
-
 # Incluimos las variables del archivo .env.
 source .env
 
@@ -25,6 +22,8 @@ chown nobody:nogroup /var/www/html
 # Editamos el archivo /etc/exports
 cp ../exports/exports /etc/exports
 
-sed -i "s/"NFS_FRONTEND_NETWORK/$NFS_FRONTEND_NETWORK/" /etc/exports
+# Cambiamos el contenido del export para incorporar la ip privada del servidor nfs. 
+sed -i "s#NFS_FRONTEND_NETWORK#$NFS_FRONTEND_NETWORK#" /etc/exports
 
+# Reiniciamos el servicio de nfs. 
 systemctl restart nfs-kernel-server
