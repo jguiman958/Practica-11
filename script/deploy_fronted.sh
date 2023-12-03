@@ -5,7 +5,7 @@
 set -ex
 
 # Actualización de repositorios
- sudo apt update
+apt update
 
 # Actualización de paquetes
 # sudo apt upgrade  
