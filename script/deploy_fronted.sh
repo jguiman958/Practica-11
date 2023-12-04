@@ -65,6 +65,12 @@ wp plugin install bbpress --activate --path=/var/www/html --allow-root
 # Instalamos el plugin para ocultar wp-admin
 wp plugin install wps-hide-login --activate --path=/var/www/html --allow-root
 
+# Configuramos la variables https.
+sed -i "/COLLATE/a \$_SERVER['HTTPS'] = 'on';" /var/www/html/wp-config.php
+
+# Copiamos el archivo .htaccess a /var/www/html
+cp ../conf/.htaccess /var/www/html
+
 # Habilitar permalinks
  wp rewrite structure '/%postname%/' \
   --path=/var/www/html \
