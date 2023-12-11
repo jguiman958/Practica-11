@@ -54,6 +54,12 @@ wp core install \
 # Actualizamos el core
 wp core update --path=/var/www/html --allow-root
 
+# Actualizamos el tema.
+wp theme update --all --path=/var/www/html --allow-root
+
+# Actualizamos el plugin.
+wp plugin update --all --path=/var/www/html --allow-root
+
 # Instalamos un tema:
 
 wp theme install sydney --activate --path=/var/www/html --allow-root
@@ -68,20 +74,14 @@ wp plugin install wps-hide-login --activate --path=/var/www/html --allow-root
 # Configuramos la variables https.
 sed -i "/COLLATE/a \$_SERVER['HTTPS'] = 'on';" /var/www/html/wp-config.php
 
-# Copiamos el archivo .htaccess a /var/www/html
-cp ../conf/.htaccess /var/www/html
-
 # Habilitar permalinks
- wp rewrite structure '/%postname%/' \
-  --path=/var/www/html \
-  --allow-root
+ wp rewrite structure '/%postname%/' --path=/var/www/html --allow-root
   
 # Modificamos automaticamente el nombre que establece por defecto el plugin wpd-hide-login
 wp option update whl_page $WORDPRESS_HIDE_LOGIN --path=/var/www/html --allow-root
 
-
-# Hbailitamos la modalidad de reescritura.
-a2enmod rewrite
+# Htacces en html
+cp ../conf/.htaccess /var/www/html/
 
 # Cambiamos al propietario de /var/www/html como www-data
 chown -R www-data:www-data /var/www/html
