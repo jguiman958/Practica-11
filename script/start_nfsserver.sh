@@ -5,7 +5,7 @@
 set -ex
 
 # Actualización de repositorios
- sudo apt update
+ apt update
 
 # Incluimos las variables del archivo .env.
 source .env
